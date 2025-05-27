@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Venta</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    body.container {
+      background: #fff8f0;
+      color: #5a3e1b;
+      min-height: 100vh;
+      padding-top: 2rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    h1 { font-weight: 700; font-size: 2.5rem; margin-bottom: 2rem; }
+    label { font-weight: 600; }
+    .btn-primary {
+      background-color: #7b3f00;
+      border-color: #7b3f00;
+      color: #fff8f0;
+      transition: background-color 0.3s ease;
+      margin-right: 0.5rem;
+    }
+    .btn-primary:hover {
+      background-color: #a55b00;
+      border-color: #a55b00;
+      color: white;
+    }
+    .btn-secondary {
+      background-color: #7b3f00;
+      border-color: #7b3f00;
+      color: #fff8f0;
+      transition: background-color 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background-color: #a55b00;
+      border-color: #a55b00;
+      color: white;
+    }
+  </style>
+</head>
+<body class="container mt-5">
+  <h1>✏️ Editar Venta</h1>
+  <form action="/ventas/editar/<%= venta._id %>" method="POST">
+    <div class="form-group">
+      <label for="id_producto">Producto:</label>
+      <select name="id_producto" id="id_producto" class="form-control" required>
+        <% productos.forEach(p => { %>
+          <option value="<%= p._id %>" <%= p._id.toString() === venta.id_producto.toString() ? 'selected' : '' %>>
+            <%= p.nombre_producto %> (Stock: <%= p.cantidad %>)
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cantidad_vendida">Cantidad vendida:</label>
+      <input type="number" name="cantidad_vendida" id="cantidad_vendida" class="form-control" min="1" required value="<%= venta.cantidad_vendida %>" />
+    </div>
+
+    <div class="form-group">
+      <label for="fecha_venta">Fecha de venta:</label>
+      <input type="date" name="fecha_venta" id="fecha_venta" class="form-control" value="<%= new Date(venta.fecha_venta).toISOString().split('T')[0] %>" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/ventas" class="btn btn-secondary">Cancelar</a>
+  </form>
+</body>
+</html>

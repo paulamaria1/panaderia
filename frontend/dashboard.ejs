@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - Panadería</title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #5a3e1b;
+      min-height: 100vh;
+    }
+    nav {
+      background-color: rgba(123, 63, 0, 0.85) !important;
+    }
+    .jumbotron {
+      background: rgba(255, 244, 230, 0.85);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(90, 62, 27, 0.3);
+      padding: 2.5rem 2rem;
+    }
+    .btn-primary {
+      background-color: #7b3f00;
+      border-color: #7b3f00;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #a55b00;
+      border-color: #a55b00;
+    }
+    .btn-secondary {
+      background-color: #c69c6d;
+      border-color: #c69c6d;
+      color: #4b2e00;
+      transition: background-color 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background-color: #a57d4f;
+      border-color: #a57d4f;
+      color: white;
+    }
+    .card-emoji {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .card {
+      background: rgba(255, 244, 230, 0.9);
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 5px 10px rgba(123, 63, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(123, 63, 0, 0.35);
+    }
+    footer {
+      background-color: rgba(123, 63, 0, 0.85);
+      color: #f4f6f7;
+      padding: 1rem 0;
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand font-weight-bold" href="#">🍞 Panadería Dulce Hogar</a>
+    <div class="ml-auto">
+      <span class="navbar-text mr-3">Hola, <strong><%= nombre_usuario %></strong></span>
+      <a href="/logout" class="btn btn-outline-light btn-sm">Cerrar sesión</a>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="jumbotron text-center">
+      <h1 class="display-4 mb-3">¡Bienvenido, <%= nombre_usuario %>!</h1>
+      <p class="lead mb-4">Este es tu panel de control para gestionar la panadería.</p>
+      <hr class="my-4" />
+      <div class="row justify-content-center">
+        <div class="col-md-3 mb-4">
+          <div class="card p-4">
+            <div class="card-emoji">🎂</div>
+            <h5 class="card-title">Productos</h5>
+            <p class="card-text">Crea,aculiza y elimina nuevos productos.</p>
+            <a href="/productos" class="btn btn-primary btn-block">Ver Productos</a>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card p-4">
+            <div class="card-emoji">🍪</div>
+            <h5 class="card-title">Categorias</h5>
+            <p class="card-text">Gestiona la variedad de Categorias.</p>
+            <a href="/categorias" class="btn btn-primary btn-block">Ver Categorias</a>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card p-4">
+            <div class="card-emoji">🍩</div>
+            <h5 class="card-title">Proveedores</h5>
+            <p class="card-text">Revisa y actualiza las proveedores.</p>
+            <a href="/proveedores" class="btn btn-primary btn-block">Ver Productos</a>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card p-4">
+            <div class="card-emoji">🥖</div>
+            <h5 class="card-title">Ventas</h5>
+            <p class="card-text">Controla las ventas del dia.</p>
+            <a href="/ventas" class="btn btn-primary btn-block">Ver Productos</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <footer>
+    <div>© 2025 Panadería Dulce Hogar. Diseñado por María Paula Valencia Martínez.</div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

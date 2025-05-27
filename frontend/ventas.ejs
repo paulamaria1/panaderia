@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ventas</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    body.container {
+      background: #fff8f0; /* fondo cálido */
+      color: #5a3e1b; /* marrón oscuro */
+      min-height: 100vh;
+      padding-top: 2rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .table {
+      background: #fff4e6; /* fondo suave para tabla */
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(90, 62, 27, 0.2);
+    }
+
+    .table thead th {
+      background-color: #7b3f00;
+      color: #fff8f0;
+      border: none;
+      text-align: center;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f9e7c2;
+    }
+
+    /* Botones con colores y transiciones */
+    .btn-warning {
+      background-color: #c69c6d;
+      border-color: #c69c6d;
+      color: #4b2e00;
+      transition: background-color 0.3s ease;
+    }
+    .btn-warning:hover {
+      background-color: #a57d4f;
+      border-color: #a57d4f;
+      color: white;
+    }
+
+    .btn-danger {
+      background-color: #a83a00;
+      border-color: #a83a00;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    .btn-danger:hover {
+      background-color: #7b2b00;
+      border-color: #7b2b00;
+    }
+
+    .btn-secondary {
+      background-color: #7b3f00;
+      border-color: #7b3f00;
+      color: #fff8f0;
+      transition: background-color 0.3s ease;
+      margin-right: 0.5rem;
+    }
+    .btn-secondary:hover {
+      background-color: #a55b00;
+      border-color: #a55b00;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: #7b3f00;
+      border-color: #7b3f00;
+      color: #fff8f0;
+      transition: background-color 0.3s ease;
+      margin-right: 0.5rem;
+    }
+    .btn-primary:hover {
+      background-color: #a55b00;
+      border-color: #a55b00;
+      color: white;
+    }
+
+    /* Centramos botones en la celda */
+    td > a, td > form > button {
+      margin-right: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body class="container mt-5">
+  <h1>🛒 Lista de Ventas</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Total</th>
+        <th>Fecha de Venta</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% ventas.forEach(v => { %>
+        <tr>
+          <td><%= v.nombre_producto %></td>
+          <td><%= v.cantidad_vendida %></td>
+          <td>$<%= v.precio_unitario.toFixed(2) %></td>
+          <td>$<%= (v.precio_unitario * v.cantidad_vendida).toFixed(2) %></td>
+          <td><%= new Date(v.fecha_venta).toLocaleDateString() %></td>
+          <td>
+            <a href="/ventas/editar/<%= v._id %>" class="btn btn-warning btn-sm" title="Editar Venta">✏️ Editar</a>
+
+            <form action="/ventas/eliminar/<%= v._id %>" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar esta venta?');" title="Eliminar Venta">🗑️ Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <div class="mt-4">
+    <a href="/ventas/nuevo" class="btn btn-primary">➕ Nueva Venta</a>
+    <a href="/dashboard" class="btn btn-secondary">⬅ Volver al Dashboard</a>
+  </div>
+</body>
+</html>

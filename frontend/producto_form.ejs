@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title><%= producto ? 'Editar' : 'Nuevo' %> Producto</title>
+</head>
+<body>
+  <h1><%= producto ? 'Editar' : 'Agregar' %> Producto</h1>
+  <form method="POST" action="<%= producto ? '/productos/editar/' + producto._id : '/productos/nuevo' %>">
+    <label>Nombre: <input type="text" name="nombre_producto" value="<%= producto?.nombre_producto || '' %>" required></label><br>
+
+    <label>Categoría:
+      <select name="id_categoria" required>
+        <option value="">-- Selecciona --</option>
+        <% categorias.forEach(cat => { %>
+          <option value="<%= cat._id %>" <%= producto && producto.id_categoria?.toString() === cat._id.toString() ? 'selected' : '' %>>
+            <%= cat.nombre_categoria %>
+          </option>
+        <% }) %>
+      </select>
+    </label><br>
+
+    <label>Precio: <input type="number" step="0.01" name="precio" value="<%= producto?.precio || '' %>" required></label><br>
+    <label>Cantidad: <input type="number" name="cantidad" value="<%= producto?.cantidad || '' %>" required></label><br>
+    <label>Fecha Ingreso: <input type="date" name="fecha_ingreso" value="<%= producto?.fecha_ingreso ? producto.fecha_ingreso.toISOString().split('T')[0] : '' %>" required></label><br>
+
+    <button type="submit"><%= producto ? 'Actualizar' : 'Agregar' %></button>
+  </form>
+  <a href="/productos">🔙 Volver a productos</a>
+</body>
+</html>

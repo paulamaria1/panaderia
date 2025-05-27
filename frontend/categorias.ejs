@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Categorías - Panadería</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #fff8f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 30px 15px;
+      color: #5a3e1b;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff4e6;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(90, 62, 27, 0.2);
+    }
+    h1, h2 {
+      color: #7b3f00;
+      margin-bottom: 25px;
+      font-weight: 700;
+      text-align: center;
+    }
+    form {
+      margin-bottom: 30px;
+      display: flex;
+      gap: 15px;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 10px 15px;
+      border: 2px solid #c69c6d;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #5a3e1b;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus {
+      border-color: #7b3f00;
+      outline: none;
+      box-shadow: 0 0 8px #c69c6daa;
+    }
+    button {
+      background-color: #4a7c00;
+      border: none;
+      color: #fff8f0;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #6aae00;
+    }
+    /* Tabla estilo igual a productos */
+    table {
+      width: 100%;
+    }
+    thead th {
+      background-color: #7b3f00;
+      color: #fff8f0;
+      font-weight: 700;
+      padding: 12px;
+      text-align: center;
+    }
+    tbody tr {
+      background-color: #fff8f0;
+      transition: background-color 0.3s ease;
+    }
+    tbody tr:hover {
+      background-color: #f9e7c2;
+    }
+    tbody td {
+      padding: 12px;
+      vertical-align: middle !important;
+      text-align: center;
+      color: #5a3e1b;
+    }
+    /* Botones iguales a productos */
+    .btn-warning {
+      background-color: #ffc107;
+      border-color: #ffc107;
+      color: #212529;
+    }
+    .btn-warning:hover {
+      background-color: #e0a800;
+      border-color: #d39e00;
+      color: #212529;
+    }
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      color: white;
+    }
+    .btn-danger:hover {
+      background-color: #bd2130;
+      border-color: #b21f2d;
+    }
+    .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+      color: white;
+      margin-right: 8px;
+    }
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: white;
+      margin-right: 8px;
+    }
+    .btn-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+    .btn-success {
+      background-color: #28a745;
+      border-color: #28a745;
+      color: white;
+      margin-right: 8px;
+    }
+    .btn-success:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Administrar Categorías</h1>
+
+    <form action="/categorias" method="POST">
+      <input
+        type="text"
+        id="nombre_categoria"
+        name="nombre_categoria"
+        required
+        placeholder="Ejemplo: Panadería"
+        autofocus
+      />
+      <button type="submit">Agregar Categoría</button>
+    </form>
+
+    <h2>Categorías existentes</h2>
+    <% if (categorias.length === 0) { %>
+      <p class="text-center text-muted" style="color:#a67c00;">No hay categorías aún.</p>
+    <% } else { %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre Categoría</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% categorias.forEach(cat => { %>
+            <tr>
+              <td><%= cat._id %></td>
+              <td><%= cat.nombre_categoria %></td>
+              <td>
+                <a href="/categorias/editar/<%= cat._id %>" class="btn btn-warning btn-sm">✏️ Editar</a>
+                <form action="/categorias/eliminar/<%= cat._id %>" method="POST" style="display:inline;">
+                  <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar esta categoría?');">🗑️ Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } %>
+
+    <a class="btn btn-secondary" href="/dashboard">⬅ Volver al Dashboard</a>
+  </div>
+</body>
+</html>

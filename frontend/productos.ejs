@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Productos</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    body.container {
+      background: #fff8f0; /* fondo muy claro y cálido */
+      color: #5a3e1b; /* marrón oscuro para el texto */
+      min-height: 100vh;
+      padding-top: 2rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .table {
+      background: #fff4e6; /* fondo muy suave en la tabla */
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(90, 62, 27, 0.2);
+    }
+
+    .table thead th {
+      background-color: #7b3f00;
+      color: #fff8f0;
+      border: none;
+      text-align: center;
+    }
+
+    .table tbody tr:hover {
+      background-color: #f9e7c2;
+    }
+
+    .btn-warning {
+      background-color: #c69c6d;
+      border-color: #c69c6d;
+      color: #4b2e00;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-warning:hover {
+      background-color: #a57d4f;
+      border-color: #a57d4f;
+      color: white;
+    }
+
+    .btn-danger {
+      background-color: #a83a00;
+      border-color: #a83a00;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-danger:hover {
+      background-color: #7b2b00;
+      border-color: #7b2b00;
+    }
+
+    .btn-secondary {
+      background-color: #7b3f00;
+      border-color: #7b3f00;
+      color: #fff8f0;
+      transition: background-color 0.3s ease;
+      margin-right: 0.5rem;
+    }
+
+    .btn-secondary:hover {
+      background-color: #a55b00;
+      border-color: #a55b00;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: #7b3f00;
+      border-color: #7b3f00;
+      color: #fff8f0;
+      transition: background-color 0.3s ease;
+      margin-right: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background-color: #a55b00;
+      border-color: #a55b00;
+      color: white;
+    }
+
+    .btn-success {
+      background-color: #4a7c00;
+      border-color: #4a7c00;
+      color: #fff8f0;
+      transition: background-color 0.3s ease;
+      margin-left: 0.5rem;
+    }
+
+    .btn-success:hover {
+      background-color: #6aae00;
+      border-color: #6aae00;
+      color: white;
+    }
+
+    /* Centramos los botones de acción */
+    td > a, td > form > button {
+      margin-right: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+<body class="container mt-5">
+  <h1 class="mb-4">📦 Lista de Productos</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Fecha de ingreso</th>
+        <th>Categoría</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% productos.forEach(p => { %>
+        <tr>
+          <td><%= p.nombre_producto %></td>
+          <td>$<%= p.precio %></td>
+          <td><%= p.cantidad %></td>
+          <td><%= p.fecha_ingreso ? new Date(p.fecha_ingreso).toLocaleDateString() : '' %></td>
+          <td><%= p.nombre_categoria || 'Sin categoría' %></td>
+          <td>
+            <a href="/productos/editar/<%= p._id %>" class="btn btn-warning btn-sm">✏️ Editar</a>
+            <form action="/productos/eliminar/<%= p._id %>" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este producto?');">🗑️ Eliminar</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <div class="mt-4">
+    <a class="btn btn-secondary" href="/dashboard">⬅ Volver al Dashboard</a>
+    <a href="/categorias" class="btn btn-primary">Agregar Categoría</a>
+    <a href="/productos/nuevo" class="btn btn-success">Agregar Producto</a>
+  </div>
+</body>
+</html>
