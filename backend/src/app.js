@@ -449,6 +449,9 @@ app.post('/ventas/eliminar/:id', async (req, res) => {
     res.status(500).send('Error eliminando la venta');
   }
 });
+app.get('/', (req, res) => {
+  res.redirect('/login');
+});
 
     app.listen(port, () => {
       console.log(`🚀 Servidor escuchando en http://localhost:${port}`);
