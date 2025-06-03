@@ -76,7 +76,10 @@ async function main() {
     }));
 
     app.use(express.static(path.join(__dirname, '../../frontend')));
-
+    
+ app.get('/', (req, res) => {
+  res.redirect('/login');
+});
     // RUTAS
 
     app.get('/login', (req, res) => {
@@ -448,9 +451,6 @@ app.post('/ventas/eliminar/:id', async (req, res) => {
     console.error(error);
     res.status(500).send('Error eliminando la venta');
   }
-});
-app.get('/', (req, res) => {
-  res.redirect('/login');
 });
 
     app.listen(port, () => {
